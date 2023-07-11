@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ProductCardComponent } from './product/product-card/product-card.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ProductsService } from './services/products.service';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,12 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     NavBarComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ProductsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

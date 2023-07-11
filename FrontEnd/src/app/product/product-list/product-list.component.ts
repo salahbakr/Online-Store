@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-product-list',
@@ -6,31 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
-  products: Array<any> = [
-    {
-    "Id": 1,
-    "Name": "Joker Pants",
-    'Type': "pants",
-    "Price": 250
-    },
-    {
-    "Id": 2,
-    "Name": "Karla House",
-    'Type': "House",
-    "Price": 3521
-    },
-    {
-    "Id": 3,
-    "Name": "Lamborghini",
-    'Type': "Car",
-    "Price": 1000000
-    },
-    {
-    "Id": 4,
-    "Name": "Ferrari",
-    'Type': "Car",
-    "Price": 3600000
-    },
-  ]
+  products!: any;
+
+  constructor (private productsService: ProductsService) { }
+
+  ngOnInit(): void {
+    this.productsService.getAllProducts().subscribe(
+      data=>{
+              console.log(data);
+              this.products = data;
+            }, error => {
+              console.log(error)
+            }
+    );
+  }
 
 }
