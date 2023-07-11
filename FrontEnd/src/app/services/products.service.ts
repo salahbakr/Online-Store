@@ -10,12 +10,12 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllProducts(): Observable<IProduct[]> {
+  getAllProducts(BuySell: number): Observable<IProduct[]> {
     return this.http.get('data/products.json').pipe(
       map((data:any) => {
         const productsArray: Array<IProduct> = [];
         for (const id in data) {
-          if (data.hasOwnProperty(id)) {
+          if (data.hasOwnProperty(id) && data[id].BuySell === BuySell) {
             productsArray.push(data[id]);
           }
         }

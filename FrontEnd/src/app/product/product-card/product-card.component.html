@@ -1,7 +1,8 @@
 
 
 <div class="card">
-  <img src="https://static.vecteezy.com/system/resources/previews/016/026/296/original/cute-trousers-clipart-illustration-casual-spring-season-clothes-icon-design-resource-for-poster-and-banner-free-vector.jpg" class="card-img-top" alt="pants" style="height: 250px;">
+  <img *ngIf="product.Image" src="{{ product.Image }}" class="card-img-top" alt="pants" style="height: 250px;">
+  <img *ngIf="!product.Image" src="https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg" class="card-img-top" alt="pants" style="height: 250px;">
   <div class="card-body p-3">
     <h1 class="card-title">{{ product.Name }}</h1>
     <h2 class="card-text">{{ product.Type }}</h2>
@@ -9,7 +10,7 @@
   </div>
   <ul class="list-inline text-center animate">
     <li class="list-inline-item">
-      <button class="cardbtn btn btn-primary">Info</button>
+      <button class="cardbtn btn btn-primary" routerLink="/product-details/{{ product.Id }}">Info</button>
     </li>
     <li class="list-inline-item">
       <button class="cardbtn btn btn-primary">Contact</button>

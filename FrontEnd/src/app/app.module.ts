@@ -9,11 +9,15 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ProductsService } from './services/products.service';
 import { AddProductComponent } from './product/add-product/add-product.component';
+import { ProductDetailsComponent } from './product/product-details/product-details.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: ProductListComponent},
   { path: 'add-product', component: AddProductComponent},
-  { path: 'sell-product', component: ProductListComponent}
+  { path: 'sell-product', component: ProductListComponent},
+  { path: 'product-details/:id', component: ProductDetailsComponent},
+  { path: '**', component: PageNotFoundComponent}
 ]
 
 @NgModule({
@@ -22,7 +26,9 @@ const appRoutes: Routes = [
     ProductCardComponent,
     ProductListComponent,
     NavBarComponent,
-    AddProductComponent
+    AddProductComponent,
+    ProductDetailsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

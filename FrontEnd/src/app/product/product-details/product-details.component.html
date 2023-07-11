@@ -1,0 +1,10 @@
+<p>product-details works!</p>
+<h1> {{ productId }} </h1>
+<br>
+
+<button class="btn btn-primary" (click)="onSelectNext()">Select Next Page</button>
+<br/> <br/>
+<button class="btn btn-primary" routerLink="/product-details/1">1</button>
+<button class="btn btn-primary" routerLink="/product-details/2">2</button>
+<button class="btn btn-primary" routerLink="/product-details/3">3</button>
+<button class="btn btn-primary" [routerLink]="['/product-details', '4']">4</button>

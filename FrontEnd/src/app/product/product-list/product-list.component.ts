@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IProduct } from 'src/app/Interface/iproduct';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -9,11 +10,17 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductListComponent {
   products!: Array<IProduct>;
+  BuySell: number = 1;
 
-  constructor (private productsService: ProductsService) { }
+  constructor (private route: ActivatedRoute ,private productsService: ProductsService) { }
 
   ngOnInit(): void {
-    this.productsService.getAllProducts().subscribe(
+
+    if(this.route.snapshot.url.toString()) {
+      this.BuySell = 2;
+    }
+
+    this.productsService.getAllProducts(this.BuySell).subscribe(
       data=>{
               console.log(data);
               this.products = data;
