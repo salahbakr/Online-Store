@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,6 +18,12 @@ export class AddProductComponent {
 
   onBack() {
     this.router.navigate(['/']);
+  }
+
+  onSubmit(Form: NgForm) {
+    console.log('Congratz');
+    console.log(Form);
+    
   }
 
 }
