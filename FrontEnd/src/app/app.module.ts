@@ -14,6 +14,8 @@ import { ProductDetailsComponent } from './product/product-details/product-detai
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
+import { UserService } from './services/user.service';
+import { AlertifyService } from './services/alertify.service';
 
 const appRoutes: Routes = [
   { path: '', component: ProductListComponent},
@@ -45,7 +47,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    ProductsService
+    ProductsService,
+    UserService,
+    AlertifyService
   ],
   bootstrap: [AppComponent]
 })

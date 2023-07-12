@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { User } from 'src/app/model/user';
+import { UserService } from 'src/app/services/user.service';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-user-register',
@@ -9,8 +12,11 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 export class UserRegisterComponent {
 
   registrationForm!: FormGroup;
+  user!: User;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, 
+              private userService: UserService, 
+              private alertify: AlertifyService ) { }
 
   ngOnInit() {
     // this.registrationForm = new FormGroup({
@@ -30,7 +36,7 @@ export class UserRegisterComponent {
       password: [null, [Validators.required, Validators.minLength(8)]],
       confirmPassword: [null, [Validators.required, Validators.minLength(8)]],
       mobile: [null, [Validators.required, Validators.maxLength(11)]]
-    }, {ValidationErrors: this.passwordMatchingValidator});
+    }, {validators: this.passwordMatchingValidator});
   }
 
   passwordMatchingValidator(fc: AbstractControl): ValidationErrors | null {
@@ -59,8 +65,21 @@ export class UserRegisterComponent {
   }
 
   onSubmit() {
-    console.log(this.registrationForm);
-    
+    if(this.registrationForm.valid) {
+      //this.user = Object.assign(this.user, this.registrationForm.value);
+      this.userService.addUser(this.userData());
+      this.registrationForm.reset();
+      this.alertify.success("Registered Successfully!");
+    }
+  }
+
+  userData(): User {
+    return this.user = {
+      userName: this.userName.value,
+      email: this.email.value,
+      password: this.password.value,
+      mobile: this.mobile.value,
+    }
   }
 
 }
