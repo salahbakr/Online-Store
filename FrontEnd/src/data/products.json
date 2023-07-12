@@ -16,7 +16,7 @@
     },
     {
     "Id": 3,
-    "BuySell": 2,
+    "BuySell": 1,
     "Name": "Lamborghini",
     "Type": "Car",
     "Price": 1000000,
@@ -24,7 +24,7 @@
     },
     {
     "Id": 4,
-    "BuySell": 2,
+    "BuySell": 1,
     "Name": "Ferrari",
     "Type": "Car",
     "Price": 3600000,

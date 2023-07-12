@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-register',
@@ -10,16 +10,27 @@ export class UserRegisterComponent {
 
   registrationForm!: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.registrationForm = new FormGroup({
-      userName: new FormControl(null, [Validators.required, Validators.minLength(5)]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-      confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-      mobile: new FormControl(null, [Validators.required, Validators.maxLength(11)])
-    }, this.passwordMatchingValidator);
+    // this.registrationForm = new FormGroup({
+      // userName: new FormControl(null, [Validators.required, Validators.minLength(5)]),
+      // email: new FormControl(null, [Validators.required, Validators.email]),
+      // password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+      // confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+      // mobile: new FormControl(null, [Validators.required, Validators.maxLength(11)])
+    // }, this.passwordMatchingValidator);
+    this.createRegistrationForm();
+  }
+
+  createRegistrationForm() {
+    this.registrationForm = this.fb.group({
+      userName: [null, [Validators.required, Validators.minLength(5)]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(8)]],
+      confirmPassword: [null, [Validators.required, Validators.minLength(8)]],
+      mobile: [null, [Validators.required, Validators.maxLength(11)]]
+    }, {ValidationErrors: this.passwordMatchingValidator});
   }
 
   passwordMatchingValidator(fc: AbstractControl): ValidationErrors | null {
