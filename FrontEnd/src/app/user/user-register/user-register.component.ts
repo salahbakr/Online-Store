@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-register',
@@ -16,7 +17,8 @@ export class UserRegisterComponent {
 
   constructor(private fb: FormBuilder, 
               private userService: UserService, 
-              private alertify: AlertifyService ) { }
+              private alertify: AlertifyService,
+              private router: Router) { }
 
   ngOnInit() {
     // this.registrationForm = new FormGroup({
@@ -68,8 +70,11 @@ export class UserRegisterComponent {
     if(this.registrationForm.valid) {
       //this.user = Object.assign(this.user, this.registrationForm.value);
       this.userService.addUser(this.userData());
-      this.registrationForm.reset();
       this.alertify.success("Registered Successfully!");
+      if(!localStorage.getItem('token')) {
+        localStorage.setItem('token', this.registrationForm.get('userName')?.value);
+        this.router.navigate(["/"]);
+      }
     }
   }
 

@@ -9,14 +9,14 @@
     },
     {
     "Id": 2,
-    "BuySell": 1,
+    "BuySell": 2,
     "Name": "Karla House",
     "Type": "House",
     "Price": 3521
     },
     {
     "Id": 3,
-    "BuySell": 1,
+    "BuySell": 2,
     "Name": "Lamborghini",
     "Type": "Car",
     "Price": 1000000,

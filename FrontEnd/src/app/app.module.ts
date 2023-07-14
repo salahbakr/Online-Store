@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { AppComponent } from './app.component';
 import { ProductCardComponent } from './product/product-card/product-card.component';
@@ -16,6 +19,7 @@ import { UserRegisterComponent } from './user/user-register/user-register.compon
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserService } from './services/user.service';
 import { AlertifyService } from './services/alertify.service';
+import { AuthenticationService } from './services/authentication.service';
 
 const appRoutes: Routes = [
   { path: '', component: ProductListComponent},
@@ -44,12 +48,17 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    TabsModule.forRoot(),
+    ButtonsModule,
     RouterModule.forRoot(appRoutes)
+    
   ],
   providers: [
     ProductsService,
     UserService,
-    AlertifyService
+    AlertifyService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

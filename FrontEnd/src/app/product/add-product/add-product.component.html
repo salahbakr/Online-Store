@@ -1,48 +1,92 @@
 
-<div class="card">
-    <div class="card-header"> Add New Product </div>
-    <div class="card-body">
-        <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
-
-            <div class="form-group col-12">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': name.invalid && name.touched }">
-
-                <div *ngIf="name.errors?.['required']">
-                    <div class="alert alert-danger" *ngIf="name.invalid && name.touched">Product Name Is Required...</div>
-                </div>
-
-                <div *ngIf="name.errors?.['minlength']">
-                    <div class="alert alert-danger" *ngIf="name.invalid && name.touched">Minimum Length is 5 Characters...</div>
-                </div>
-
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header"><h2>Add New Product</h2></div>
+            <div class="card-body">
+                <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+                    <div>
+                        <tabset #staticTabs>
+                            <p>I want to</p>
+                            <div class="btn-group" btnRadioGroup>
+                                <label class="btn btn-outline-primary" style="margin-right: 10px;"
+                                btnRadio=1 role="button" name="SellBuy">Sell</label>
+                                <label class="btn btn-outline-primary"
+                                btnRadio=2 role="button" name="SellBuy">Buy</label>
+                            </div>
+                            <tab heading="Basic Info">
+                                <div class="form-group col-12">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" formControlName="name" [(ngModel)]="productView.Name" [ngClass]="{ 'is-invalid': name.invalid && name.touched }">
+                
+                                    <div *ngIf="name.errors?.['required']">
+                                        <div class="alert alert-danger" *ngIf="name.invalid && name.touched">Product Name Is Required...</div>
+                                    </div>
+                
+                                    <div *ngIf="name.errors?.['minlength']">
+                                        <div class="alert alert-danger" *ngIf="name.invalid && name.touched">Minimum Length is 5 Characters...</div>
+                                    </div>
+                                </div>
+                
+                                <div class="form-group col-12">
+                                    <label for="type">Type</label>
+                                    <input type="text" class="form-control" formControlName="type" [(ngModel)]="productView.Type" [ngClass]="{ 'is-invalid': type.invalid && type.touched }">
+                
+                                        <div *ngIf="type.errors?.['required']">
+                                            <div class="alert alert-danger" *ngIf="type.invalid && type.touched">Type Is Required...</div>
+                                        </div>
+                                </div>
+                
+                                <div class="form-group col-12">
+                                    <label for="price">Price</label>
+                                    <input type="number" class="form-control" formControlName="price" [(ngModel)]="productView.Price" [ngClass]="{ 'is-invalid': price.invalid && price.touched }">
+                
+                                    <div *ngIf="price.errors?.['required']">
+                                        <div class="alert alert-danger" *ngIf="price.invalid && price.touched">Price Is Required...</div>
+                                    </div>
+                                </div>
+                
+                                <div class="form-group col-12 mt-3">
+                                    <button type="button" class="btn btn-primary w-100" (click)="selectTab(1)">Next</button>
+                                </div>
+                            </tab>
+                            <tab heading="Description and Specifications">
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" rows="3" formControlName="desc"></textarea>
+                                    <div class="alert alert-danger" *ngIf="desc.errors?.['required'] && desc.invalid && desc.touched">Description Is Required...</div>
+                                    <div class="alert alert-danger" *ngIf="desc.errors?.['minlength'] && desc.invalid && desc.touched">Description Minimum Length 50 Characters...</div>
+                                    <div class="alert alert-danger" *ngIf="desc.errors?.['maxlength'] && desc.invalid && desc.touched">Description Max Length 500 Characters...</div>
+                                </div>
+                            
+                                <div class="mb-3">
+                                    <label for="specifications" class="form-label">Specifications</label>
+                                    <textarea class="form-control" rows="3" formControlName="spec"></textarea>
+                                    <div class="alert alert-danger" *ngIf="spec.errors?.['required'] && spec.invalid && spec.touched">Specifications Are Required...</div>
+                                    <div class="alert alert-danger" *ngIf="spec.errors?.['minlength'] && spec.invalid && spec.touched">Specifications Minimum Length 50 Characters...</div>
+                                    <div class="alert alert-danger" *ngIf="spec.errors?.['maxlength'] && spec.invalid && spec.touched">Specifications Max Length 500 Characters...</div>
+                                </div>
+        
+                                <button type="button" class="btn btn-primary w-100" (click)="selectTab(2)">Next</button>
+                                <button type="button" class="btn btn-primary w-100 mt-2"  (click)="selectTab(0)">Previous</button>
+                            </tab>
+                            <tab heading="Photos">
+                                Upload Product photos
+                                <button type="submit" class="btn btn-primary w-100" (click)="onSubmit()">Add Product</button>
+                                <button type="button" class="btn btn-primary w-100 mt-2" (click)="selectTab(1)">Previous</button>
+                            </tab>
+                        </tabset>
+                    </div>
+                </form>
             </div>
-
-            <div class="form-group col-12">
-                <label for="type">Type</label>
-                <input type="text" class="form-control" formControlName="type" [ngClass]="{ 'is-invalid': type.invalid && type.touched }">
-
-                <div *ngIf="type.errors?.['required']">
-                    <div class="alert alert-danger" *ngIf="type.invalid && type.touched">Type Is Required...</div>
-                </div>
-
-            </div>
-
-            <div class="form-group col-12">
-                <label for="price">Price</label>
-                <input type="number" class="form-control" formControlName="price" [ngClass]="{ 'is-invalid': price.invalid && price.touched }">
-
-                <div *ngIf="price.errors?.['required']">
-                    <div class="alert alert-danger" *ngIf="price.invalid && price.touched">Price Is Required...</div>
-                </div>
-
-            </div>
-
-            <div class="form-group col-12 mt-3">
-                <button [disabled]="addProductForm.invalid" type="submit" class="btn btn-primary" style="margin-right: 10px;">Save</button>
-                <button type="reset" class="btn btn-primary">Cancel</button>
-            </div>
-
-        </form>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card-header">
+            <h2>Your Product Preview</h2>
+        </div>
+        <div>
+            <app-product-card [product]="productView"></app-product-card>
+        </div>
     </div>
 </div>

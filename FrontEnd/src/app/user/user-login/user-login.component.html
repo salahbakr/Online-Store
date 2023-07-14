@@ -1,1 +1,50 @@
-<p>user-login works!</p>
+<div class="row">
+    <div class="col-6 m-auto">
+    <div class="card m-auto">
+      <div class="card-header">
+        Login
+      </div>
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <div class="form-group col-12">
+              <label for="name" class="form-label">User Name</label>
+              <input type="text" 
+              class="form-control" 
+              formControlName="userName"
+              [ngClass]="{ 'is-invalid': userName.invalid && userName.touched }">
+
+            <div *ngIf="userName.errors?.['required']">
+                <div class="alert alert-danger" *ngIf="userName.invalid && userName.touched">User Name Is Required...</div>
+            </div>
+
+            <div *ngIf="userName.errors?.['minlength']">
+                <div class="alert alert-danger" *ngIf="userName.invalid && userName.touched">User Name is Minimum 5 Characters Long...</div>
+            </div>
+
+          </div>
+  
+          <div class="form-group col-12">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" 
+            class="form-control" 
+            formControlName="password"
+            [ngClass]="{ 'is-invalid': password.invalid && password.touched }">
+
+            <div *ngIf="password.errors?.['required']">
+                <div class="alert alert-danger" *ngIf="password.invalid && password.touched">Password Is Required...</div>
+            </div>
+
+            <div *ngIf="password.errors?.['minlength']">
+                <div class="alert alert-danger" *ngIf="password.invalid && password.touched">Minimum Password Length 8 Characters...</div>
+            </div>
+          </div>
+  
+          <div class="form-group col-12 mt-3">
+            <button type="submit" class="btn btn-primary" style="margin-right: 10px;" [disabled]="loginForm.invalid">Log In</button>
+            <button type="reset" class="btn btn-secondary" routerLink="/user/register">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+  </div>
